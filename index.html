@@ -109,6 +109,7 @@
       font-size: 24px;
       animation: floatUp 5s linear forwards;
       opacity: 0.8;
+      pointer-events: none;
     }
 
     @keyframes floatUp {
@@ -124,6 +125,7 @@
       background: white;
       top: -10px;
       animation: fall 3s linear forwards;
+      pointer-events: none;
     }
 
     @keyframes fall {
@@ -189,7 +191,12 @@
       music.play().catch(() => {});
     }
 
-    document.body.addEventListener('click', playMusic, { once: true });
+    document.body.addEventListener('click', playMusic);
+
+    // ensure buttons remain clickable on mobile
+    document.querySelectorAll('button').forEach(btn => {
+      btn.style.pointerEvents = 'auto';
+    });
     function sayYes() {
       playMusic();
       document.getElementById('proposalCard').classList.add('hidden');
