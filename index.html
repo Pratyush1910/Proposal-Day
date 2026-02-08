@@ -20,6 +20,7 @@
       align-items: center;
       justify-content: center;
       color: #fff;
+      overflow: hidden;
     }
 
     .card {
@@ -31,19 +32,20 @@
       width: 90%;
       text-align: center;
       box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
-      animation: fadeIn 1.2s ease;
+      animation: fadeIn 1.5s ease;
     }
 
     h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 2.4rem;
+      font-size: 2.5rem;
       margin-bottom: 15px;
     }
 
     p {
       font-size: 1.05rem;
       line-height: 1.7;
-      margin-bottom: 25px;
+      margin-bottom: 30px;
+      opacity: 0.95;
     }
 
     .heart {
@@ -65,6 +67,7 @@
       border-radius: 30px;
       font-size: 1rem;
       cursor: pointer;
+      transition: all 0.3s ease;
     }
 
     .yes {
@@ -73,13 +76,25 @@
       font-weight: 600;
     }
 
+    .yes:hover {
+      transform: scale(1.08);
+      background: #ffe3ea;
+    }
+
     .no {
       background: transparent;
       border: 2px solid #fff;
       color: #fff;
     }
 
-    .hidden { display: none; }
+    .no:hover {
+      transform: translateY(-3px);
+      opacity: 0.8;
+    }
+
+    .hidden {
+      display: none;
+    }
 
     @keyframes heartbeat {
       0%, 100% { transform: scale(1); }
@@ -94,7 +109,7 @@
     .final-message {
       font-family: 'Playfair Display', serif;
       font-size: 2rem;
-      margin-top: 15px;
+      margin-top: 20px;
     }
   </style>
 </head>
@@ -104,11 +119,13 @@
     <h1>Hey Sara 💖</h1>
     <p>
       From random smiles to endless thoughts,
+      from quiet moments to loud heartbeats —
       everything feels better with you, Sara.
     </p>
     <div class="heart">❤️</div>
     <p>
-      So today, I just want to ask you one thing…
+      So today, on Proposal Day,
+      I just want to ask you one thing…
     </p>
 
     <h1>Sara, will you be mine?</h1>
@@ -122,15 +139,26 @@
   <div class="card hidden" id="yesCard">
     <h1>YAY!! 💘</h1>
     <div class="heart">💖</div>
-    <p>You just made Pratyush’s heart the happiest.</p>
-    <p class="final-message">Officially yours — Pratyush 💍❤️</p>
+    <p class="final-message">
+      You just made Pratyush’s heart the happiest.
+    </p>
+    <p>
+      This is just the beginning of our beautiful story ✨
+    </p>
   </div>
 
   <div class="card hidden" id="noCard">
-    <h1>🥺</h1>
-    <p class="final-message">Please 😭😭😭😭😭</p>
-    <button class="yes" onclick="tryAgain()">Try Again 💖</button>
+    <h1>😅</h1>
+    <p>
+      Okay… I respect that.
+      But just know — you’re still amazing 🌸
+    </p>
   </div>
+
+  <!-- Background Music -->
+  <audio id="bgMusic" autoplay loop>
+    <source src="her.mp3" type="audio/mpeg">
+  </audio>
 
   <script>
     function sayYes() {
@@ -143,10 +171,12 @@
       document.getElementById('noCard').classList.remove('hidden');
     }
 
-    function tryAgain() {
-      document.getElementById('noCard').classList.add('hidden');
-      document.getElementById('proposalCard').classList.remove('hidden');
-    }
+    const noBtn = document.querySelector('.no');
+    noBtn.addEventListener('mouseenter', () => {
+      const x = Math.random() * 200 - 100;
+      const y = Math.random() * 200 - 100;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    });
   </script>
 
 </body>
