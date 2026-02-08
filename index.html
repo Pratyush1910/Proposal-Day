@@ -171,20 +171,27 @@
   </div>
 
   <div class="card hidden" id="noCard">
-    <h1>😅</h1>
-    <p>
-      Okay… I respect that.
-      But just know — you’re still amazing 🌸
-    </p>
+    <h1>🥺</h1>
+    <p class="final-message">Please 😭😭😭😭😭</p>
+    <button class="yes" onclick="tryAgain()">Try Again 💖</button>
   </div>
 
   <!-- Background Music -->
-  <audio id="bgMusic" autoplay loop>
+  <audio id="bgMusic" loop>
     <source src="her.mp3" type="audio/mpeg">
   </audio>
 
   <script>
+    const music = document.getElementById('bgMusic');
+    music.volume = 0.8;
+
+    function playMusic() {
+      music.play().catch(() => {});
+    }
+
+    document.body.addEventListener('click', playMusic, { once: true });
     function sayYes() {
+      playMusic();
       document.getElementById('proposalCard').classList.add('hidden');
       document.getElementById('yesCard').classList.remove('hidden');
       launchConfetti();
@@ -221,6 +228,21 @@
       document.getElementById('proposalCard').classList.add('hidden');
       document.getElementById('noCard').classList.remove('hidden');
     }
+
+    function tryAgain() {
+      document.getElementById('noCard').classList.add('hidden');
+      document.getElementById('proposalCard').classList.remove('hidden');
+    }
+
+    const noBtn = document.querySelector('.no');
+    const moveNoButton = () => {
+      const x = Math.random() * 200 - 100;
+      const y = Math.random() * 200 - 100;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    };
+
+    noBtn.addEventListener('mouseenter', moveNoButton);
+    noBtn.addEventListener('touchstart', moveNoButton);
 
     const noBtn = document.querySelector('.no');
     noBtn.addEventListener('mouseenter', () => {
